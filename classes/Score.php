@@ -1,18 +1,15 @@
-<?php 
+<?php
 
-class UserReview {
-
+class Score {
     protected int $id;
-    protected string $message;
+    protected int $value;
     protected int $tour_operator_id;
     protected int $author_id;
-    
-
 
     /**
      * Get the value of id
      */
-    public function getId(): int
+    public function getScoreId(): int
     {
         return $this->id;
     }
@@ -20,7 +17,7 @@ class UserReview {
     /**
      * Set the value of id
      */
-    public function setId(int $id): self
+    public function setScoreId(int $id): self
     {
         $this->id = $id;
 
@@ -28,19 +25,19 @@ class UserReview {
     }
 
     /**
-     * Get the value of message
+     * Get the value of value
      */
-    public function getMessage(): string
+    public function getScoreValue(): int
     {
-        return $this->message;
+        return $this->value;
     }
 
     /**
-     * Set the value of message
+     * Set the value of value
      */
-    public function setMessage(string $message): self
+    public function setScoreValue(int $value): self
     {
-        $this->message = $message;
+        $this->value = $value;
 
         return $this;
     }
@@ -66,7 +63,7 @@ class UserReview {
     /**
      * Get the value of author_id
      */
-    public function getAuthorId(): int
+    public function getScoreAuthorId(): int
     {
         return $this->author_id;
     }
@@ -74,7 +71,7 @@ class UserReview {
     /**
      * Set the value of author_id
      */
-    public function setAuthorId(int $author_id): self
+    public function setScoreAuthorId(int $author_id): self
     {
         $this->author_id = $author_id;
 
