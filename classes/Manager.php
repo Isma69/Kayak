@@ -77,8 +77,21 @@ class Manager {
         ");
         $query->bindParam(':tour_operator_id', $tourOperatorId);
         $query->execute();
-
+    
         return $query->fetch(PDO::FETCH_ASSOC);
     }
 
+
+    public function addReview($tourOperatorId, $authorName, $review) {
+        // Insérez d'abord le nom de l'auteur dans la table 'author'
+        $query = $this->db->prepare("INSERT INTO author (name) VALUES (?)");
+        $query->execute([$authorName]);
+    
+        // Obtenez l'ID de l'auteur nouvellement créé
+        $authorId = $this->db->lastInsertId();
+    
+        // Insérez ensuite l'avis dans la table 'review' avec l'ID de l'auteur
+        $query = $this->db->prepare("INSERT INTO review (message, tour_operator_id, author_id) VALUES (?, ?, ?)");
+        $query->execute([$review, $tourOperatorId, $authorId]);
+    }
 }

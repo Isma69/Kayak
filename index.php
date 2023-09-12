@@ -37,7 +37,7 @@ if (substr($currentURL, -6) === '/admin') {
         </nav>
     </header>
     
-    <div class="container mt-5">
+    <div class="container mt-5 text-center">
         <h1>Liste des Destinations</h1>
 
         <?php
@@ -52,12 +52,13 @@ if (substr($currentURL, -6) === '/admin') {
 
 <div class="row">
     <?php foreach ($destinations as $destination) { ?>
-        <div class="col-md-4 mb-4">
+        <div class="col-md-4 mt-3 d-flex">
             <div class="card">
-                <div class="card-body">
-                    <h5 class="card-title"><?php echo $destination['location']; ?></h5>
+                <div class="card-body d-flex flex-column"> <!-- Utilisez la classe flex-column pour aligner le contenu à l'intérieur de la carte -->
+                    <h5 class="card-title text-center"><?php echo $destination['location']; ?></h5>
+                    <img src="<?php echo $destination['picture']; ?>" class="cardImage"></img>
                     <p class="card-text">Prix : <?php echo $destination['price']; ?> €</p>
-                    <a href="tour_operator.php?destination_id=<?php echo $destination['id']; ?>" class="btn btn-primary">Voir le Tour Opérateur</a>
+                    <a href="tour_operator.php?destination_id=<?php echo $destination['id']; ?>" class="btn btn-primary mt-auto">Voir le Tour Opérateur</a>
                 </div>
             </div>
         </div>
