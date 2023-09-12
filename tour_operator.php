@@ -43,20 +43,40 @@
                 echo "<p>Site Web : <a href='{$details['link']}' target='_blank'>{$details['link']}</a></p>";
                 echo "<p>Note d'avis globale : {$details['average_score']}</p>";
                 echo "<p>Prix de la destination : {$details['destination_price']} €</p>";
-                
+        
                 if (!empty($details['authors'])) {
-                    echo "<p>Avis des utilisateurs :<br>{$details['reviews']}</p>";
+                    $authorsArray = explode(', ', $details['authors']);
+                    $reviewsArray = explode('<br>', $details['reviews']);
+                    
+                    echo "<ul>Avis des utilisateurs :</ul>";
+                    
+                    for ($i = 0; $i < count($authorsArray); $i++) {
+                        echo "<li>{$authorsArray[$i]} : {$reviewsArray[$i]}</li>";
+                    }
                 } else {
                     echo "Aucun avis disponible pour ce tour opérateur.";
                 }
-                // Affichez d'autres informations du tour opérateur si nécessaire
             } else {
                 echo "Tour Opérateur non trouvé pour cette destination.";
             }
-        } else {
-            echo "ID de destination non spécifié dans l'URL.";
         }
         ?>
+
+<form method="post" action="process/addReview.php">
+    <div class="form-group">
+        <label for="author_name">Nom de l'auteur :</label>
+        <input type="text" class="form-control" id="author_name" name="author_name" required>
+    </div>
+    <div class="form-group">
+        <label for="review">Votre avis :</label>
+        <textarea class="form-control" id="review" name="review" rows="4" required></textarea>
+    </div>
+    <!-- Ajoutez un champ caché pour tour_operator_id -->
+    <input type="hidden" name="tour_operator_id" value="<?php echo $tourOperator['id']; ?>">
+    <!-- Utilisez également un champ caché pour destination_id -->
+    <input type="hidden" name="destination_id" value="<?php echo $destinationId; ?>">
+    <button type="submit" class="btn btn-primary">Soumettre l'avis</button>
+</form>
 
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
             integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"

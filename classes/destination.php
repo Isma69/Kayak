@@ -4,12 +4,14 @@ class Destination {
     protected int $id;
     protected string $location;
     protected int $price;
+    protected string $picture;
     protected int $tour_operator_id;
 
-    public function __construct(int $id, string $location, int $price, int $tour_operator_id) {
+    public function __construct(int $id, string $location, int $price, string $picture, int $tour_operator_id) {
         $this->id = $id;
         $this->location = $location;
         $this->price = $price;
+        $this->picture = $picture;
         $this->tour_operator_id = $tour_operator_id;
     }
 
@@ -81,6 +83,24 @@ class Destination {
     public function setTourOperatorId(int $tour_operator_id): self
     {
         $this->tour_operator_id = $tour_operator_id;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of picture
+     */
+    public function getPicture(): string
+    {
+        return $this->picture;
+    }
+
+    /**
+     * Set the value of picture
+     */
+    public function setPicture(string $picture): self
+    {
+        $this->picture = $picture;
 
         return $this;
     }
