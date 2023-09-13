@@ -56,5 +56,71 @@ class Admin {
     public function closeConnection() {
         $this->conn = null;
     }
+
+    public function getAllTourOperators() {
+        try {
+            $sql = "SELECT id, name, link, is_premium FROM tour_operator";
+            $result = $this->conn->query($sql);
+    
+            if ($result->rowCount() > 0) {
+                return $result->fetchAll(PDO::FETCH_ASSOC);
+            } else {
+                return [];
+            }
+        } catch (PDOException $e) {
+            echo "Erreur lors de la récupération des opérateurs touristiques : " . $e->getMessage();
+            return [];
+        }
+    }
+
+    public function setTourOperatorPremiumStatus($tour_operator_id, $is_premium) {
+        try {
+            $sql = "UPDATE tour_operator SET is_premium = :is_premium WHERE id = :tour_operator_id";
+            $stmt = $this->conn->prepare($sql);
+            $stmt->bindParam(":is_premium", $is_premium, PDO::PARAM_BOOL);
+            $stmt->bindParam(":tour_operator_id", $tour_operator_id, PDO::PARAM_INT);
+            $stmt->execute();
+        } catch (PDOException $e) {
+            echo "Erreur lors de la mise à jour du statut premium : " . $e->getMessage();
+        }
+    }
+    
+    public function isTourOperatorPremium($tour_operator_id) {
+        try {
+            $sql = "SELECT is_premium FROM tour_operator WHERE id = :tour_operator_id";
+            $stmt = $this->conn->prepare($sql);
+            $stmt->bindParam(":tour_operator_id", $tour_operator_id, PDO::PARAM_INT);
+            $stmt->execute();
+            $result = $stmt->fetch(PDO::FETCH_ASSOC);
+            return $result['is_premium'] == 1; // Convertit en booléen (true si is_premium = 1)
+        } catch (PDOException $e) {
+            echo "Erreur lors de la récupération du statut premium : " . $e->getMessage();
+            return false; // En cas d'erreur, retourne false par défaut
+        }
+    }
+
+    public function addPremiumStatus($tour_operator_id) {
+        try {
+            $sql = "UPDATE tour_operator SET is_premium = 1 WHERE id = :tour_operator_id";
+            $stmt = $this->conn->prepare($sql);
+            $stmt->bindParam(":tour_operator_id", $tour_operator_id, PDO::PARAM_INT);
+            $stmt->execute();
+        } catch (PDOException $e) {
+            echo "Erreur lors de la mise à jour du statut premium : " . $e->getMessage();
+        }
+    }
+    
+    public function removePremiumStatus($tour_operator_id) {
+        try {
+            $sql = "UPDATE tour_operator SET is_premium = 0 WHERE id = :tour_operator_id";
+            $stmt = $this->conn->prepare($sql);
+            $stmt->bindParam(":tour_operator_id", $tour_operator_id, PDO::PARAM_INT);
+            $stmt->execute();
+        } catch (PDOException $e) {
+            echo "Erreur lors de la mise à jour du statut premium : " . $e->getMessage();
+        }
+    }
+    
+    
 }
 ?>
