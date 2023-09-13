@@ -50,26 +50,27 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/admin-styles.css">
     <title>Back Office</title>
 </head>
 <body>
 <div class="container-fluid">
     <div class="row">
-        <nav id="sidebar" class="col-md-3 col-lg-2 d-md-block bg-light sidebar">
+    <nav id="sidebar" class="col-md-3 col-lg-2 d-md-block bg-light sidebar">
             <div class="position-sticky">
                 <ul class="nav flex-column">
                     <li class="nav-item">
-                        <a class="nav-link active" href="index.php">
+                        <a class="nav-link active btn btn-large" href="index.php">
                             Accueil
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="admin.php">
+                        <a class="nav-link btn btn-large" href="admin.php">
                             Back Office
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="tour_operator_admin.php">
+                        <a class="nav-link btn btn-large" href="tour_operator_admin.php">
                             Tour Operator
                         </a>
                     </li>
@@ -98,6 +99,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <label for="tour_operator_id">ID de l'opérateur touristique :</label>
             <input type="number" class="form-control" id="tour_operator_id" name="tour_operator_id" required>
         </div>
+        <br/>
         <button type="submit" class="btn btn-primary">Ajouter</button>
     </form>
 </div>
@@ -135,6 +137,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     echo '<input type="hidden" name="edit_id" value="' . $row["id"] . '">';
                     echo '<button type="submit" class="btn btn-primary">Modifier</button>';
                     echo '</form>';
+                    echo '<br />';
                     echo '<form method="post">';
                     echo '<input type="hidden" name="delete_id" value="' . $row["id"] . '">';
                     echo '<button type="submit" class="btn btn-danger">Supprimer</button>';

@@ -19,6 +19,7 @@ if (isset($_POST["remove_premium_id"])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/admin-styles.css">
     <title>TOAdmin</title>
 </head>
 <body>
@@ -28,17 +29,17 @@ if (isset($_POST["remove_premium_id"])) {
             <div class="position-sticky">
                 <ul class="nav flex-column">
                     <li class="nav-item">
-                        <a class="nav-link active" href="index.php">
+                        <a class="nav-link active btn btn-large" href="index.php">
                             Accueil
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="admin.php">
+                        <a class="nav-link btn btn-large" href="admin.php">
                             Back Office
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="tour_operator_admin.php">
+                        <a class="nav-link btn btn-large" href="tour_operator_admin.php">
                             Tour Operator
                         </a>
                     </li>
@@ -61,6 +62,7 @@ if (isset($_POST["remove_premium_id"])) {
             <label for="link">Lien du Tour Opérateur</label>
             <input type="url" class="form-control" id="link" name="link" required>
         </div>
+        <br/>
         <button type="submit" class="btn btn-primary">Ajouter</button>
     </form>
 </div>
@@ -92,6 +94,7 @@ if (!empty($tourOperators)) {
         echo '<input type="hidden" name="edit_id" value="' . $row["id"] . '">';
         echo '<button type="submit" class="btn btn-primary">Modifier</button>';
         echo '</form>';
+        echo '<br />';
         echo '<form method="post">';
         echo '<input type="hidden" name="delete_id" value="' . $row["id"] . '">';
         echo '<button type="submit" class="btn btn-danger">Supprimer</button>';
