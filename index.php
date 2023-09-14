@@ -1,8 +1,13 @@
 <?php
 include_once "header.php";
-?>
 
-<div class="container mt-5 text-center">
+$currentURL = $_SERVER['REQUEST_URI'];
+
+if (substr($currentURL, -6) === '/admin') {
+    header('Location: admin.php');
+    exit();
+}
+?>
         <h1>Liste des Destinations</h1>
 
         <?php
