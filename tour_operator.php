@@ -51,6 +51,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             if ($tourOperator) {
                 $details = $manager->getTourOperatorDetails($tourOperator->getId());
                 $averageScore = round($details['average_score']);
+            }}
                 ?>
                 <div class="row">
                     <div class="col-4 text-center">
@@ -59,7 +60,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         </h3>
                         <p>
                             <?php if ($tourOperator->isPremium()): ?>
-                                Site Web : <a href="<?php echo $tourOperator->getLink(); ?>" target="_blank"><?php echo $tourOperator->getLink(); ?></a>
+                                Site Web : <a href="<?php echo $tourOperator->getLink(); ?>"
+                                    target="_blank"><?php echo $tourOperator->getLink(); ?></a>
                             <?php endif; ?>
                         </p>
 
@@ -72,61 +74,63 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     </div>
                 </div>
                 <?php
-                if (!empty($details['authors'])) {
+                if (!empty($details['authors']) && !empty($details['reviews'])) {
                     $authorsArray = explode(', ', $details['authors']);
                     $reviewsArray = explode('<br>', $details['reviews']);
-                    ?>
-                    <section class="review">
-                        <ul>
+
+                    if (!empty($authorsArray) && !empty($reviewsArray)) {
+                        ?>
+                        <section class="review">
                             <h4 class="text-center">Avis des utilisateurs</h4>
-                        </ul>
-                        <ul>
-                            <?php
-                            for ($i = 0; $i < count($authorsArray); $i++) {
-                                ?>
-                                <li>
-                                    <?php echo "{$authorsArray[$i]} : {$reviewsArray[$i]}"; ?>
-                                </li>
+                            <ul>
                                 <?php
-                            }
-                            ?>
-                        </ul>
-                    </section>
-                    <?php
+                                for ($i = 0; $i < count($authorsArray) && $i < count($reviewsArray); $i++) {
+                                    ?>
+                                    <li>
+                                        <?php echo "{$authorsArray[$i]} : {$reviewsArray[$i]}"; ?>
+                                    </li>
+                                    <?php
+                                }
+                                ?>
+                            </ul>
+                        </section>
+                        <?php
+                    } else {
+                        echo "Aucun avis disponible pour ce tour opérateur.";
+                    }
                 } else {
                     echo "Aucun avis disponible pour ce tour opérateur.";
                 }
-            }
-        }
-        ?>
+                ?>
 
-        <form method="post"
-            action="tour_operator.php?destination_id=<?php echo $destinationId; ?>&tour_operator_id=<?php echo $tourOperatorId; ?>">
-            <div class="form-group">
-                <label for="author_name">Nom de l'auteur :</label>
-                <input type="text" class="form-control" id="author_name" name="author_name" required>
+                <form method="post"
+                    action="tour_operator.php?destination_id=<?php echo $destinationId; ?>&tour_operator_id=<?php echo $tourOperatorId; ?>">
+                    <div class="form-group">
+                        <label for="author_name">Nom de l'auteur :</label>
+                        <input type="text" class="form-control" id="author_name" name="author_name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="review">Votre avis :</label>
+                        <textarea class="form-control" id="review" name="review" rows="4" required></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="score">Votre note :</label>
+                        <select class="form-control" id="score" name="score" required>
+                            <option value="1">1 - Très mauvais</option>
+                            <option value="2">2 - Mauvais</option>
+                            <option value="3">3 - Moyen</option>
+                            <option value="4">4 - Bon</option>
+                            <option value="5">5 - Excellent</option>
+                        </select>
+                    </div>
+                    <!-- Ajoutez un champ caché pour tour_operator_id -->
+                    <input type="hidden" name="tour_operator_id" value="<?php echo $tourOperatorId; ?>">
+                    <!-- Utilisez également un champ caché pour destination_id -->
+                    <input type="hidden" name="destination_id" value="<?php echo $destinationId; ?>">
+                    <button type="submit" class="btn btn-primary" <?php if ($authorHasReview): ?>onclick="afficherErreur()"
+                        <?php endif; ?>>Soumettre l'avis</button>
+                </form>
             </div>
-            <div class="form-group">
-                <label for="review">Votre avis :</label>
-                <textarea class="form-control" id="review" name="review" rows="4" required></textarea>
-            </div>
-            <div class="form-group">
-                <label for="score">Votre note :</label>
-                <select class="form-control" id="score" name="score" required>
-                    <option value="1">1 - Très mauvais</option>
-                    <option value="2">2 - Mauvais</option>
-                    <option value="3">3 - Moyen</option>
-                    <option value="4">4 - Bon</option>
-                    <option value="5">5 - Excellent</option>
-                </select>
-            </div>
-            <!-- Ajoutez un champ caché pour tour_operator_id -->
-            <input type="hidden" name="tour_operator_id" value="<?php echo $tourOperatorId; ?>">
-            <!-- Utilisez également un champ caché pour destination_id -->
-            <input type="hidden" name="destination_id" value="<?php echo $destinationId; ?>">
-            <button type="submit" class="btn btn-primary" <?php if ($authorHasReview): ?>onclick="afficherErreur()"
-                <?php endif; ?>>Soumettre l'avis</button>
-        </form>
     </div>
 </section>
 
@@ -135,14 +139,6 @@ include_once "footer.php";
 ?>
 
 <script>
-    // JavaScript pour afficher une boîte de dialogue d'erreur
-    <?php if ($authorHasReview): ?>
-        // Si l'auteur a déjà laissé un avis, définissez une variable pour afficher la boîte de dialogue
-        var afficherBoiteErreur = true;
-    <?php else: ?>
-        var afficherBoiteErreur = false;
-    <?php endif; ?>
-
     function afficherErreur() {
         if (afficherBoiteErreur) {
             alert("L'auteur a déjà laissé un avis pour ce tour opérateur.");

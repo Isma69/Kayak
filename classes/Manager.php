@@ -196,5 +196,19 @@ class Manager {
         return false;
     }
 }
+
+public function getReviewsForTourOperatorSortedByAuthorId($tourOperatorId) {
+    $query = "SELECT r.message, a.name as author_name 
+              FROM review r
+              JOIN Author a ON r.author_id = a.id
+              WHERE r.tour_operator_id = :tourOperatorId
+              ORDER BY r.author_id";
+
+    $stmt = $this->db->prepare($query);
+    $stmt->bindParam(':tourOperatorId', $tourOperatorId, PDO::PARAM_INT);
+    $stmt->execute();
+
+    return $stmt->fetchAll(PDO::FETCH_ASSOC);
+}
 }
 
