@@ -121,7 +121,7 @@ if (!empty($tourOperators)) {
         // echo '<input type="hidden" name="edit_id" value="' . $row["id"] . '">';
         // echo '<button type="submit" class="btn btn-primary">Modifier</button>';
         // echo '</form>';
-        echo '<br />';
+        // echo '<br />';
         echo '<form method="post">';
         echo '<input type="hidden" name="delete_id" value="' . $row["id"] . '">';
         echo '<button type="submit" class="btn btn-danger">Supprimer</button>';

@@ -121,6 +121,25 @@ class Admin {
         }
     }
     
+    public function addAdministrator($username, $passwordHash) {
+        try {
+            $sql = "INSERT INTO administrator (username, password) VALUES (:username, :password)";
+            $stmt = $this->conn->prepare($sql);
+            $stmt->bindParam(":username", $username, PDO::PARAM_STR);
+            $stmt->bindParam(":password", $passwordHash, PDO::PARAM_STR);
+            $stmt->execute();
+        } catch (PDOException $e) {
+            echo "Erreur lors de l'ajout de l'administrateur : " . $e->getMessage();
+        }
+    }
+
+    public function getAllAdministrator($username)
+    {
+        $req = $this->conn->prepare("SELECT * FROM administrator WHERE username = :username LIMIT 1 ");
+        $req->bindParam(":username", $username);
+        $req->execute();
+        return $req->fetch(PDO::FETCH_ASSOC);
+    }
     
 }
 ?>

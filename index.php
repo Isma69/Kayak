@@ -2,7 +2,7 @@
 $currentURL = $_SERVER['REQUEST_URI'];
 
 if (substr($currentURL, -6) === '/admin') {
-    header('Location: admin.php');
+    header('Location: loginAdmin.php');
     exit();
 }
 
