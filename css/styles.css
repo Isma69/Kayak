@@ -27,17 +27,16 @@ h2 {
 
 body, html {
     width: 100%;
-    margin: 0 !important;
     padding: 0;
     position: relative;
     min-height: 100vh;
 }
 
 footer {
-    position: absolute;
+    position: relative;
     bottom: 0;
     width: 100%;
-    margin-top: 20px !important;
+    margin-top: 0px !important;
 }
 
 /* Style pour les liens */
