@@ -4,11 +4,13 @@ class TourOperator {
     protected int $id;
     protected string $name;
     protected string $link;
+    protected bool $is_premium;
 
-    public function __construct(int $id, string $name, string $link) {
+    public function __construct(int $id, string $name, string $link, bool $is_premium) {
         $this->id = $id;
         $this->name = $name;
         $this->link = $link;
+        $this->is_premium = $is_premium;
     }
 
     /**
@@ -61,6 +63,24 @@ class TourOperator {
     public function setLink(string $link): self
     {
         $this->link = $link;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of is_premium
+     */
+    public function isPremium(): bool
+    {
+        return $this->is_premium;
+    }
+
+    /**
+     * Set the value of is_premium
+     */
+    public function setIsPremium(bool $is_premium): self
+    {
+        $this->is_premium = $is_premium;
 
         return $this;
     }
