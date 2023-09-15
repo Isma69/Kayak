@@ -25,7 +25,7 @@ if (isset($_POST["remove_premium_id"])) {
 <body>
 <div class="container-fluid">
     <div class="row">
-        <nav id="sidebar" class="col-md-3 col-lg-2 d-md-block bg-light sidebar">
+        <nav id="sidebar" class="col-md-3 col-lg-2 d-md-block sidebar">
             <div class="position-sticky">
                 <ul class="nav flex-column">
                     <li class="nav-item">
@@ -46,11 +46,38 @@ if (isset($_POST["remove_premium_id"])) {
                 </ul>
             </div>
         </nav>
-
-        <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+        <main class="col-md-3 ms-sm-auto col-lg-10 px-md-4">
         </main>
     </div>
 </div>
+<style>
+    #sidebar {
+    background-color: #0077C0; 
+    color: white; 
+    padding-top: 20px; 
+    height: 100%; /* Utilisez la hauteur de 100% pour remplir la hauteur de la colonne parente */
+    position: fixed; /* Position fixe pour le maintenir en place lors du défilement */
+    top: 0; /* Collez la sidebar en haut */
+    left: 0; /* Collez la sidebar à gauche */
+    width: 250px; /* Définissez la largeur de votre choix */
+    overflow-y: auto; /* Ajoutez une barre de défilement si le contenu dépasse la hauteur */
+    z-index: 1; /* Assurez-vous qu'il est au-dessus du contenu principal */
+}
+
+#sidebar ul.nav {
+    padding-left: 0; /* Supprimer le retrait de la liste */
+    list-style-type: none; /* Supprimer les puces de la liste */
+}
+
+#sidebar .nav-link {
+    color: white; /* Couleur du texte des liens */
+    border-radius: 0; /* Supprimer les coins arrondis des boutons */
+}
+
+#sidebar .nav-link:hover {
+    background-color: #1D242B; /* Couleur de fond au survol */
+}
+</style>
 <div class="container">
     <h2>Ajouter un nouveau Tour Opérateur</h2>
     <form action="actions/addTourOperatorAdmin.php" method="post">
@@ -90,10 +117,10 @@ if (!empty($tourOperators)) {
         echo "<td>" . $row["link"] . "</td>";
         // Modifier et Supprimer
         echo '<td>';
-        echo '<form method="post">';
-        echo '<input type="hidden" name="edit_id" value="' . $row["id"] . '">';
-        echo '<button type="submit" class="btn btn-primary">Modifier</button>';
-        echo '</form>';
+        // echo '<form method="post">';
+        // echo '<input type="hidden" name="edit_id" value="' . $row["id"] . '">';
+        // echo '<button type="submit" class="btn btn-primary">Modifier</button>';
+        // echo '</form>';
         echo '<br />';
         echo '<form method="post">';
         echo '<input type="hidden" name="delete_id" value="' . $row["id"] . '">';
@@ -128,7 +155,27 @@ if (!empty($tourOperators)) {
         </tbody>
     </table>
 </div>
+<style>
+    #sidebar {
+    background-color: #0077C0; 
+    color: white; 
+    padding-top: 20px; 
+}
 
+#sidebar ul.nav {
+    padding-left: 0; /* Supprimer le retrait de la liste */
+}
+
+#sidebar .nav-link {
+    color: white; /* Couleur du texte des liens */
+    border-radius: 0; /* Supprimer les coins arrondis des boutons */
+}
+
+#sidebar .nav-link:hover {
+    background-color: #1D242B; /* Couleur de fond au survol */
+}
+
+</style>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
 </body>
