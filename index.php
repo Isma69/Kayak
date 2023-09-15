@@ -9,33 +9,35 @@ if (substr($currentURL, -6) === '/admin') {
 include_once "header.php";
 
 ?>
-        <h1>Liste des Destinations</h1>
+<h2 class="text-white">Liste des Destinations</h2>
 
-        <?php
-        require_once('config/autoload.php');
+<?php
+require_once('config/autoload.php');
 
-        $db = new PDO('mysql:host=127.0.0.1;dbname=kayak;charset=utf8', 'root');
-        $manager = new Manager($db);
+$db = new PDO('mysql:host=127.0.0.1;dbname=kayak;charset=utf8', 'root');
+$manager = new Manager($db);
 
-        // Afficher toutes les destinations
-        $destinations = $manager->getAllDestinations();
-        ?>
-
+// Afficher toutes les destinations
+$destinations = $manager->getAllDestinations();
+?>
+<section class="background">
 <div class="row">
     <?php foreach ($destinations as $destination) { ?>
-        <div class="col-md-4 mt-3 d-flex">
+        <div class="col-md-4 mt-3">
             <div class="card">
-                <div class="card-body d-flex flex-column"> <!-- Utilisez la classe flex-column pour aligner le contenu à l'intérieur de la carte -->
-                    <h5 class="card-title text-center"><?php echo $destination['location']; ?></h5>
-                    <img src="<?php echo $destination['picture']; ?>" class="cardImage"></img>
-                    <p class="card-text mt-2">Prix : <?php echo $destination['price']; ?> €</p>
-                    <a href="tour_operator.php?destination_id=<?php echo $destination['id']; ?>" class="btn btn-primary mt-auto">Voir le Tour Opérateur</a>
+                <div class="card-body d-flex flex-column">
+                    <h5 class="card-title text-center"><?php echo $destination->getLocation(); ?></h5>
+                    <img src="<?php echo $destination->getPicture(); ?>" class="cardImage"></img>
+                    <p class="card-text mt-2 text-center">Prix : <?php echo $destination->getPrice(); ?> €</p>
+                    <!-- Lien vers tour_operator.php avec les paramètres de destination_id -->
+                    <a href="tour_operator.php?destination_id=<?php echo $destination->getId(); ?>" class="btn btn-primary mt-auto">Voir le Tour Opérateur</a>
                 </div>
             </div>
         </div>
     <?php } ?>
 </div>
 </div>
+</section>
 
 <?php
 include_once "footer.php";
