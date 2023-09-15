@@ -54,9 +54,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <title>Back Office</title>
 </head>
 <body>
+
+
 <div class="container-fluid">
     <div class="row">
-    <nav id="sidebar" class="col-md-3 col-lg-2 d-md-block bg-light sidebar">
+        <nav id="sidebar" class="col-md-3 col-lg-2 d-md-block sidebar">
             <div class="position-sticky">
                 <ul class="nav flex-column">
                     <li class="nav-item">
@@ -77,15 +79,41 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 </ul>
             </div>
         </nav>
-
-        <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+        <main class="col-md-3 ms-sm-auto col-lg-10 px-md-4">
         </main>
     </div>
 </div>
+<style>
+    #sidebar {
+    background-color: #0077C0; 
+    color: white; 
+    padding-top: 20px; 
+    height: 100%; /* Utilisez la hauteur de 100% pour remplir la hauteur de la colonne parente */
+    position: fixed; /* Position fixe pour le maintenir en place lors du défilement */
+    top: 0; /* Collez la sidebar en haut */
+    left: 0; /* Collez la sidebar à gauche */
+    width: 250px; /* Définissez la largeur de votre choix */
+    overflow-y: auto; /* Ajoutez une barre de défilement si le contenu dépasse la hauteur */
+    z-index: 1; /* Assurez-vous qu'il est au-dessus du contenu principal */
+}
 
+#sidebar ul.nav {
+    padding-left: 0; /* Supprimer le retrait de la liste */
+    list-style-type: none; /* Supprimer les puces de la liste */
+}
+
+#sidebar .nav-link {
+    color: white; /* Couleur du texte des liens */
+    border-radius: 0; /* Supprimer les coins arrondis des boutons */
+}
+
+#sidebar .nav-link:hover {
+    background-color: #1D242B; /* Couleur de fond au survol */
+}
+</style>
 
 <div class="container">
-<h2>Ajouter une Destination</h2>
+    <h2>Ajouter une Destination</h2>
     <form action="actions/addDestinationAdmin.php" method="post">
         <div class="form-group">
             <label for="location">Location :</label>
@@ -96,13 +124,21 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <input type="number" class="form-control" id="price" name="price" required>
         </div>
         <div class="form-group">
-            <label for="tour_operator_id">ID de l'opérateur touristique :</label>
-            <input type="number" class="form-control" id="tour_operator_id" name="tour_operator_id" required>
+            <label for="tour_operator_id">Opérateur touristique :</label>
+            <select class="form-control" id="tour_operator_id" name="tour_operator_id" required>
+                <?php
+                $tourOperators = $admin->getAllTourOperators();
+                foreach ($tourOperators as $operator) {
+                    echo '<option value="' . $operator["id"] . '">' . $operator["name"] . '</option>';
+                }
+                ?>
+            </select>
         </div>
-        <br/>
+        <br />
         <button type="submit" class="btn btn-primary">Ajouter</button>
     </form>
 </div>
+
 
 
 <div class="container">
@@ -152,6 +188,32 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         </tbody>
     </table>
 </div>
+
+<style>
+    #sidebar {
+    background-color: #0077C0; 
+    color: white; 
+    padding-top: 20px; 
+}
+
+#sidebar ul.nav {
+    padding-left: 0; /* Supprimer le retrait de la liste */
+}
+
+#sidebar .nav-link {
+    color: white; /* Couleur du texte des liens */
+    border-radius: 0; /* Supprimer les coins arrondis des boutons */
+}
+
+#sidebar .nav-link:hover {
+    background-color: #1D242B; /* Couleur de fond au survol */
+}
+
+</style>
+
+
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
+    <script src="js/admin.js"></script>
 </body>
 </html>

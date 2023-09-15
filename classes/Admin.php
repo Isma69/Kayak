@@ -92,10 +92,10 @@ class Admin {
             $stmt->bindParam(":tour_operator_id", $tour_operator_id, PDO::PARAM_INT);
             $stmt->execute();
             $result = $stmt->fetch(PDO::FETCH_ASSOC);
-            return $result['is_premium'] == 1; // Convertit en booléen (true si is_premium = 1)
+            return $result['is_premium'] == 1; 
         } catch (PDOException $e) {
             echo "Erreur lors de la récupération du statut premium : " . $e->getMessage();
-            return false; // En cas d'erreur, retourne false par défaut
+            return false; 
         }
     }
 

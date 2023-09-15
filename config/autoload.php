@@ -20,4 +20,4 @@ require __DIR__.'/../classes/' . $classname . '.php';
 spl_autoload_register('chargerClasse');
 
 // Session
-session_start();
+// session_start();
