@@ -33,7 +33,7 @@ body, html {
 }
 
 footer {
-    position: relative;
+    position: relative !important;
     bottom: 0;
     width: 100%;
     margin-top: 0px !important;

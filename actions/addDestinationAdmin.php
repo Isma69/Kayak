@@ -1,7 +1,7 @@
 <?php
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     try {
-        $conn = new PDO("mysql:host=127.0.0.1;dbname=kayak;charset=utf8", "root", "");
+        $conn = new PDO("mysql:host=127.0.0.1;dbname=kayak_isma69;charset=utf8", "isma69", "9Janvier1996");
         $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
         $location = $_POST["location"];

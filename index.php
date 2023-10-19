@@ -14,7 +14,7 @@ include_once "header.php";
 <?php
 require_once('config/autoload.php');
 
-$db = new PDO('mysql:host=127.0.0.1;dbname=kayak;charset=utf8', 'root');
+$db = new PDO("mysql:host=127.0.0.1;dbname=kayak_isma69;charset=utf8", "isma69", "9Janvier1996");
 $manager = new Manager($db);
 
 // Afficher toutes les destinations

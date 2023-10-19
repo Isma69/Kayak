@@ -8,7 +8,7 @@ $admin = new Admin();
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (isset($_POST["edit_id"])) {
         try {
-            $conn = new PDO("mysql:host=127.0.0.1;dbname=kayak;charset=utf8", "root", "");
+            $conn = new PDO("mysql:host=127.0.0.1;dbname=kayak_isma69;charset=utf8", "isma69", "9Janvier1996");
             $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
             $id = $_POST["edit_id"];
@@ -28,7 +28,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
     } elseif (isset($_POST["delete_id"])) {
         try {
-            $conn = new PDO("mysql:host=127.0.0.1;dbname=kayak;charset=utf8", "root", "");
+            $conn = new PDO("mysql:host=127.0.0.1;dbname=kayak_isma69;charset=utf8", "isma69", "9Janvier1996");
             $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
             $id = $_POST["delete_id"];
@@ -92,7 +92,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     position: fixed; /* Position fixe pour le maintenir en place lors du défilement */
     top: 0; /* Collez la sidebar en haut */
     left: 0; /* Collez la sidebar à gauche */
-    width: 250px; /* Définissez la largeur de votre choix */
+    width: 200px; /* Définissez la largeur de votre choix */
     overflow-y: auto; /* Ajoutez une barre de défilement si le contenu dépasse la hauteur */
     z-index: 1; /* Assurez-vous qu'il est au-dessus du contenu principal */
 }

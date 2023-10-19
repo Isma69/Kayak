@@ -5,7 +5,7 @@ class Admin {
 
     public function __construct() {
         try {
-            $this->conn = new PDO("mysql:host=127.0.0.1;dbname=kayak;charset=utf8", "root", "");
+            $this-> conn = new PDO("mysql:host=127.0.0.1;dbname=kayak_isma69;charset=utf8", "isma69", "9Janvier1996");
             $this->conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         } catch (PDOException $e) {
             echo "Erreur de connexion à la base de données : " . $e->getMessage();

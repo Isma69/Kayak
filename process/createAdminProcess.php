@@ -13,7 +13,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["username"]) && isset($
 
         $admin->addAdministrator($username, $passwordHash);
 
-        echo "Administrateur ajouté avec succès.";
+        header("location: ../loginAdmin.php");
+        exit; 
     } else {
         echo "Cet administrateur existe déjà.";
     }
